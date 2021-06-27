@@ -27,59 +27,89 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Expenses'),
       ),
-      body: Column(
-        children: <Widget>[
-          Card(
-            child: Text('Chart'),
-          ),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                color: Color(0xff262626),
-                child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Card(
+              child: Text('Chart'),
+            ),
+            Card(
+              color: Color(0xff262626),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.teal,
-                          width: 2,
-                        ),
-                      ),
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        '₹ ${tx.amount}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                        ),
-                      ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          DateFormat.yMMMd().format(tx.date),
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                      ],
-                    )
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      label: Text('Add transaction'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                        padding: EdgeInsets.all(18),
+                      ),
+                      icon: Icon(Icons.arrow_downward_rounded),
+                    ),
                   ],
                 ),
-              );
-            }).toList(),
-          )
-        ],
+              ),
+            ),
+            Column(
+              children: transactions.map((tx) {
+                return Card(
+                  color: Color(0xff262626),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.teal,
+                            width: 2,
+                          ),
+                        ),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          '₹ ${tx.amount}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tx.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            DateFormat.yMMMd().format(tx.date),
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            )
+          ],
+        ),
       ),
     ));
   }

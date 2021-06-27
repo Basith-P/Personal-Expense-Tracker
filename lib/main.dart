@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expense',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: HomePage(),
     );
   }

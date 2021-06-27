@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
@@ -22,6 +23,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.teal,
       appBar: AppBar(
         title: Text('Expenses'),
       ),
@@ -33,6 +35,7 @@ class HomePage extends StatelessWidget {
           Column(
             children: transactions.map((tx) {
               return Card(
+                color: Color(0xff262626),
                 child: Row(
                   children: [
                     Container(
@@ -45,12 +48,30 @@ class HomePage extends StatelessWidget {
                       margin:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       padding: EdgeInsets.all(10),
-                      child: Text(tx.amount.toString()),
+                      child: Text(
+                        '₹ ${tx.amount}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(tx.title),
-                        Text(tx.date.toString()),
+                        Text(
+                          tx.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          DateFormat.yMMMd().format(tx.date),
+                          style: TextStyle(color: Colors.white70),
+                        ),
                       ],
                     )
                   ],

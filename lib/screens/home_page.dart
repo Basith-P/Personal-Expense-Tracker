@@ -19,6 +19,9 @@ class HomePage extends StatelessWidget {
     ),
   ];
 
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,13 +46,15 @@ class HomePage extends StatelessWidget {
                   children: [
                     TextField(
                       decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
                     ),
                     TextField(
                       decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => print(titleController.text),
                       label: Text('Add transaction'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.teal,

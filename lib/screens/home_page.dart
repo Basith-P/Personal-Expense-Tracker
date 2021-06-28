@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/new_transaction.dart';
-import '../widgets/transaction_list.dart';
+import '../widgets/user_transactions.dart';
 import '../models/transaction.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,23 +12,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.teal,
-      appBar: AppBar(
-        title: Text('Expenses'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Card(
-              child: Text('Chart'),
-            ),
-            NewTransaction(),
-            TransactionList(),
-          ],
+      child: Scaffold(
+        backgroundColor: Colors.teal,
+        appBar: AppBar(
+          title: Text('Expenses'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Card(
+                child: Text('Chart'),
+              ),
+              UserTransactions(),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

@@ -4,6 +4,10 @@ class NewTransaction extends StatelessWidget {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
+  final Function addTx;
+
+  NewTransaction(this.addTx);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,7 +27,10 @@ class NewTransaction extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () => print(titleController.text),
+              onPressed: () => addTx(
+                titleController.text,
+                int.parse(amountController.text),
+              ),
               label: Text('Add transaction'),
               style: ElevatedButton.styleFrom(
                 primary: Colors.teal,

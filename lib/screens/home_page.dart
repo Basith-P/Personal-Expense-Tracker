@@ -16,6 +16,12 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.teal,
         appBar: AppBar(
           title: Text('Expenses'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add_rounded),
+              onPressed: () {},
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -26,6 +32,15 @@ class HomePage extends StatelessWidget {
               ),
               UserTransactions(),
             ],
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.black,
+          child: Icon(
+            Icons.add_rounded,
+            color: Colors.teal,
           ),
         ),
       ),

@@ -15,13 +15,14 @@ class TransactionList extends StatelessWidget {
         itemCount: transactions.length,
         itemBuilder: (ctx, index) {
           return Card(
-            color: Color(0xff262626),
+            // color: Color(0xff262626),
             child: Row(
               children: [
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.teal,
+                      color: Theme.of(context).primaryColor,
+                      // color: Colors.teal,
                       width: 2,
                     ),
                   ),
@@ -31,6 +32,7 @@ class TransactionList extends StatelessWidget {
                     '₹ ${transactions[index].amount}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
                       fontSize: 22,
                     ),
                   ),
@@ -49,7 +51,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     Text(
                       DateFormat.yMMMd().format(transactions[index].date),
-                      style: TextStyle(color: Colors.white70),
+                      // style: TextStyle(color: Colors.white70),
                     ),
                   ],
                 )

@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 
 import '../widgets/transaction_list.dart';
@@ -53,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.teal,
+        // backgroundColor: Colors.teal,
         appBar: AppBar(
           title: Text('Expenses'),
           actions: [
@@ -77,10 +75,10 @@ class _HomePageState extends State<HomePage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
           onPressed: () => _startAddNewTransaction(context),
-          backgroundColor: Colors.black,
+          // backgroundColor: Colors.black,
           child: Icon(
             Icons.add_rounded,
-            color: Colors.teal,
+            // color: Colors.teal,
           ),
         ),
       ),

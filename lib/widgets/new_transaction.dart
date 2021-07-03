@@ -32,7 +32,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xff262626),
+      // color: Color(0xff262626),
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -57,7 +57,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 primary: Colors.teal,
                 padding: EdgeInsets.all(18),
               ),
-              icon: Icon(Icons.arrow_downward_rounded),
+              icon: Icon(Icons.arrow_upward_rounded),
             ),
           ],
         ),

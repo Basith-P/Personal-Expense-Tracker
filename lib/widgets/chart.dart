@@ -21,11 +21,8 @@ class Chart extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(weekDay));
-      print(totalSum);
-
       return {
-        'map': DateFormat.E().format(weekDay),
+        'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum,
       };
     });
@@ -36,8 +33,9 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       child: Row(
-        children: [],
-      ),
+          children: groupedTxValues.map((e) {
+        return Text('${e['day']} : ${e['amount']}');
+      }).toList()),
     );
   }
 }

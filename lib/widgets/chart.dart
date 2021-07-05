@@ -31,23 +31,29 @@ class Chart extends StatelessWidget {
 
   double get totalSpending {
     return groupedTxValues.fold(0.0, (previousValue, element) {
-      return previousValue + (element['amount'] as int);
+      return previousValue + (element['amount'] as double);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(totalSpending);
     return Card(
       elevation: 6,
-      child: Row(
-        children: groupedTxValues.map((e) {
-          return ChartBar(
-            e['day'].toString(),
-            (e['amount'] as int),
-            (e['amount'] as double) / totalSpending,
-          );
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTxValues.map((e) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                e['day'].toString(),
+                (e['amount'] as int),
+                (e['amount'] as double) / totalSpending,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

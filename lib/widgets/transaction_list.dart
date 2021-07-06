@@ -36,48 +36,20 @@ class TransactionList extends StatelessWidget {
               itemCount: transactions.length,
               itemBuilder: (ctx, index) {
                 return Card(
-                  // color: Color(0xff262626),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            // color: Colors.teal,
-                            width: 2,
-                          ),
-                        ),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          '₹ ${transactions[index].amount}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 22,
-                          ),
-                        ),
+                  elevation: 8,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: FittedBox(
+                            child: Text('\$${transactions[index].amount}')),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            transactions[index].title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            DateFormat.yMMMd().format(transactions[index].date),
-                            // style: TextStyle(color: Colors.white70),
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
+                    title: Text(transactions[index].title),
+                    subtitle: Text(
+                      DateFormat.yMMMd().format(transactions[index].date),
+                    ),
                   ),
                 );
               },

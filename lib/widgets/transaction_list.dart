@@ -43,12 +43,16 @@ class TransactionList extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: FittedBox(
-                            child: Text('\$${transactions[index].amount}')),
+                            child: Text('₹${transactions[index].amount}')),
                       ),
                     ),
                     title: Text(transactions[index].title),
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.delete_rounded),
                     ),
                   ),
                 );

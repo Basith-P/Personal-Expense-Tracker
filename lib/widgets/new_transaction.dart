@@ -26,6 +26,7 @@ class _NewTransactionState extends State<NewTransaction> {
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     );
     Navigator.of(context).pop();
   }
@@ -66,9 +67,11 @@ class _NewTransactionState extends State<NewTransaction> {
             Container(
               height: 60,
               child: Row(children: [
-                Text(
-                  'Date: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}',
-                  style: TextStyle(fontSize: 16),
+                Expanded(
+                  child: Text(
+                    'Date: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
                 TextButton(
                   onPressed: _showDatePicker,

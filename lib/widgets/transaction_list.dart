@@ -4,8 +4,9 @@ import 'package:personal_expense_tracker/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final Function deleteTx;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.deleteTx);
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +52,10 @@ class TransactionList extends StatelessWidget {
                       DateFormat.yMMMd().format(transactions[index].date),
                     ),
                     trailing: IconButton(
-                      onPressed: () {},
                       icon: Icon(Icons.delete_rounded),
+                      onPressed: () {
+                        deleteTx(transactions[index].id);
+                      },
                     ),
                   ),
                 );

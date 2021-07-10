@@ -37,22 +37,25 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 6,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTxValues.map((e) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                e['day'].toString(),
-                (e['amount'] as double),
-                (e['amount'] as double) / totalSpending,
-              ),
-            );
-          }).toList(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 6,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: groupedTxValues.map((e) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                  e['day'].toString(),
+                  (e['amount'] as double),
+                  (e['amount'] as double) / totalSpending,
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );

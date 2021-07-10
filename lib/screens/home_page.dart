@@ -78,8 +78,8 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
+        body: Container(
+          // padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Chart(_recentTx),

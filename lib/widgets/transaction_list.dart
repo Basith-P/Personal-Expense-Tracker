@@ -11,7 +11,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 500,
       child: transactions.isEmpty
           ? Center(
               child: Column(
@@ -36,26 +36,29 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (ctx, index) {
-                return Card(
-                  elevation: 8,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: FittedBox(
-                            child: Text('₹${transactions[index].amount}')),
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Card(
+                    elevation: 8,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: FittedBox(
+                              child: Text('₹${transactions[index].amount}')),
+                        ),
                       ),
-                    ),
-                    title: Text(transactions[index].title),
-                    subtitle: Text(
-                      DateFormat.yMMMd().format(transactions[index].date),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete_rounded),
-                      onPressed: () {
-                        deleteTx(transactions[index].id);
-                      },
+                      title: Text(transactions[index].title),
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete_rounded),
+                        onPressed: () {
+                          deleteTx(transactions[index].id);
+                        },
+                      ),
                     ),
                   ),
                 );

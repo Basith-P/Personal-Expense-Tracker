@@ -53,24 +53,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('Expenses'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add_rounded),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
     return SafeArea(
       child: Scaffold(
         // backgroundColor: Colors.teal,
-        appBar: AppBar(
-          title: Text('Expenses'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.add_rounded),
-              onPressed: () => _startAddNewTransaction(context),
-            )
-          ],
-        ),
+        appBar: appBar,
         body: Container(
           // padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Chart(_recentTx),
-              TransactionList(_userTransactions, _deleteTx),
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.vertical) *
+                    0.2,
+                child: Chart(_recentTx),
+              ),
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.vertical) *
+                    0.8,
+                child: TransactionList(_userTransactions, _deleteTx),
+              ),
             ],
           ),
         ),

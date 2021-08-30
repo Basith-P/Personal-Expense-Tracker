@@ -24,6 +24,7 @@ class ChartBar extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 10),
             // width: 10,
             child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
               children: [
                 Container(
                   decoration: BoxDecoration(

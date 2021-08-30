@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTx {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -53,24 +55,65 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mdQry = MediaQuery.of(context);
+    final isLandScape = mdQry.orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: Text('Expenses'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add_rounded),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
+    final txListWidget = Container(
+      height: (mdQry.size.height -
+              appBar.preferredSize.height -
+              mdQry.padding.vertical) *
+          0.7,
+      child: TransactionList(_userTransactions, _deleteTx),
+    );
     return SafeArea(
       child: Scaffold(
         // backgroundColor: Colors.teal,
-        appBar: AppBar(
-          title: Text('Expenses'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.add_rounded),
-              onPressed: () => _startAddNewTransaction(context),
-            )
-          ],
-        ),
+        appBar: appBar,
         body: Container(
           // padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Chart(_recentTx),
-              TransactionList(_userTransactions, _deleteTx),
+              if (isLandScape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Show Chart'),
+                    Switch(
+                        value: _showChart,
+                        onChanged: (val) {
+                          setState(() {
+                            _showChart = val;
+                          });
+                        }),
+                  ],
+                ),
+              if (!isLandScape)
+                Container(
+                  height: (mdQry.size.height -
+                          appBar.preferredSize.height -
+                          mdQry.padding.vertical) *
+                      0.3,
+                  child: Chart(_recentTx),
+                ),
+              if (!isLandScape) txListWidget,
+              if (isLandScape)
+                _showChart
+                    ? Container(
+                        height: (mdQry.size.height -
+                                appBar.preferredSize.height -
+                                mdQry.padding.vertical,) *
+                            0.7,
+                        child: Chart(_recentTx),
+                      )
+                    : txListWidget,
             ],
           ),
         ),

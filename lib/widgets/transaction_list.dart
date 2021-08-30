@@ -10,60 +10,72 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      child: transactions.isEmpty
-          ? Center(
-              child: Column(
-                children: [
-                  Text(
-                    'No transactions',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    height: 200,
+    return transactions.isEmpty
+        ? Center(
+            child: Column(
+              children: [
+                Text(
+                  'No transactions',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Expanded(
+                  child: Container(
                     child: Image.asset(
                       'assets/images/waiting.png',
                       fit: BoxFit.cover,
                     ),
                   ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (ctx, index) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Card(
-                    elevation: 8,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: FittedBox(
-                              child: Text('₹${transactions[index].amount}')),
-                        ),
-                      ),
-                      title: Text(transactions[index].title),
-                      subtitle: Text(
-                        DateFormat.yMMMd().format(transactions[index].date),
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete_rounded),
-                        onPressed: () {
-                          deleteTx(transactions[index].id);
-                        },
+                ),
+              ],
+            ),
+          )
+        : ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: transactions.length,
+            itemBuilder: (ctx, index) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Card(
+                  elevation: 8,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: FittedBox(
+                            child: Text('₹${transactions[index].amount}')),
                       ),
                     ),
+                    title: Text(transactions[index].title),
+                    subtitle: Text(
+                      DateFormat.yMMMd().format(transactions[index].date),
+                    ),
+                    trailing: MediaQuery.of(context).size.width > 360
+                        ? TextButton.icon(
+                            onPressed: () {
+                              deleteTx(transactions[index].id);
+                            },
+                            icon: Icon(Icons.delete_rounded),
+                            label: Text('Delete'),
+                            style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.red),
+                            ),
+                          )
+                        : IconButton(
+                            color: Colors.red,
+                            icon: Icon(Icons.delete_rounded),
+                            onPressed: () {
+                              deleteTx(transactions[index].id);
+                            },
+                          ),
                   ),
-                );
-              },
-            ),
-    );
+                ),
+              );
+            },
+          );
   }
 }

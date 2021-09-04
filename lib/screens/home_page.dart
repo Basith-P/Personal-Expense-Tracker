@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/transaction_list.dart';
@@ -86,7 +88,8 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text('Show Chart'),
-                    Switch(
+                    Switch.adaptive(
+                        activeColor: Colors.teal,
                         value: _showChart,
                         onChanged: (val) {
                           setState(() {
@@ -109,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     ? Container(
                         height: (mdQry.size.height -
                                 appBar.preferredSize.height -
-                                mdQry.padding.vertical,) *
+                                mdQry.padding.vertical) *
                             0.7,
                         child: Chart(_recentTx),
                       )
@@ -118,14 +121,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _startAddNewTransaction(context),
-          // backgroundColor: Colors.black,
-          child: Icon(
-            Icons.add_rounded,
-            // color: Colors.teal,
-          ),
-        ),
+        floatingActionButton: Platform.isIOS
+            ? Container()
+            : FloatingActionButton(
+                onPressed: () => _startAddNewTransaction(context),
+                // backgroundColor: Colors.black,
+                child: Icon(
+                  Icons.add_rounded,
+                  // color: Colors.teal,
+                ),
+              ),
       ),
     );
   }
